@@ -1,22 +1,20 @@
 README FILE 
+
 -------------------------
-# Canvas Group name
-    A2 Group 42
-
-# Group leader: 
-    Gordon (Yang) Jin, 1263477
-
-# Members:
-    Yichen Jiang, 1263509
-    Jonathan Wu, 1269144
-    Di Wu, 1208784
+This project was a collaborative effort between;
+    Jonathan Wu
+    Yichen Jiang
+    Di Wu
+    Gordon (Yang) Jin
 
 
 # Introduction of intended use for code
     This program intakes data of a city's weather attributions, including 
     temperature, wind, rain, pressure etc. It trains a model which outputs
     a prediction of the energy demand of a day, given a set of comprehensive
-    weather attributes on that day.
+    weather attributes on that day. Both a linear regression model and a PCA
+    model were created and tested against our data to see which model performed
+    better based on r squared and MSE values.
 
 
 # File structure and use of each file
@@ -28,7 +26,7 @@ README FILE
           mean of the corresponding attributes from the corresponding season.
         
     price_demand_average.py
-        - Computes daily average of the price demand data is computed
+        - Computes the daily average energy demand from the data
     
     split.py
         - Unused features are removed from the data
@@ -37,15 +35,13 @@ README FILE
     
     feature_scaling.py
         - Feature standardised for PCA
-        - Mutual information calculated between attributes, avoid selecting
-          features that are highly correlated.
 
     feature_selection.py
         - Takes in the filled train datasets, calculates and prints the mutual
           information score between attributes and average demand, enabling selection
           of feature with highest correlation to predictor variable.
 
-    train_validate.py
+    Regression.py
         - Trains a linear regression model using the filled training dataset
           based on the attributes selected based on the MI score.
         - The model is assessed against the original unfilled validation dataset,
@@ -62,19 +58,17 @@ README FILE
 # Instructions on how to run your code.
 
     Order of running files:
-        data.py
+        plots.py
         price_demand_average.py
         split.py
         fill_missing_data.py
         feature_scaling.py
         feature_selection.py
-        train_validate.py
+        Regression.py
         PCA.py
-        plots.py
         
 
 
-# Any additional requirements needed to run code.
 
 
 
