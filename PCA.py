@@ -29,6 +29,7 @@ def pca_function(city_data):
     X_test = city_test.drop(columns = ["avg_demand"])
     Y_test = city_test["avg_demand"]
 
+    # Scaling our features
     normalise_scaler = MinMaxScaler()
 
     X_train = normalise_scaler.fit_transform(X_train)
@@ -68,18 +69,6 @@ def pca_function(city_data):
     print('MSE', mse)   
 
     print("\n============================================\n")
-    
-#    a, b = np.polyfit(np.array(Y_validation), np.array(Y_prediction), 1)
-#
-#    plt.scatter(Y_validation, Y_prediction)
-#    plt.plot(Y_validation, a*Y_validation + b, color="r")
-
-#    plt.ylabel("Predicted Energy Demand")
-#    plt.xlabel("Actual Energy Demand")
-#    plt.title(f"PCA + Linear Regression ({city_data})")
-#    plt.grid()
-#    plt.savefig(f"PCA + Linear Regression ({city_data}).jpg")
-#    plt.close() 
 
     # Perform 2-means clustering
     clusters = KMeans(n_clusters=2).fit(X_train)
@@ -98,7 +87,6 @@ def pca_function(city_data):
     return
 
 pca_function("melbourne")
-#pca_function("adelaide")
 pca_function("brisbane")
 pca_function("sydney")
 

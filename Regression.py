@@ -54,6 +54,7 @@ def training_validation(city_data):
 
     print("\n\n================================================\n\n")
 
+    # plotting true values against our predicted values
     plt.scatter(y_validation, y_pred, alpha=0.8)
     plt.grid()
     plt.title(f'Linear Regression Plot: {city_data}')
