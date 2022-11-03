@@ -1,11 +1,14 @@
 import pandas as pd
 from sklearn.linear_model import LinearRegression
-from sklearn.decomposition import PCA
 import matplotlib.pyplot as plt
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.metrics import mean_squared_error
 from sklearn.model_selection import train_test_split
 import numpy as np
+import seaborn as sns
+from sklearn.cluster import KMeans
+from sklearn.decomposition import PCA
+import plotly.express as px
 
 r2_list = []
 mse_list = []
@@ -43,6 +46,11 @@ def pca_function(city_data):
     val_prediction = regressor.predict(X_validation)
 
 
+    explained_variance = pca.explained_variance_ratio_
+
+    print("Variance Explained: ", explained_variance)
+    print("Total variance: ", sum(explained_variance))
+
     r2 = regressor.score(X_test, Y_test)
     mse = mean_squared_error(Y_test, Y_prediction)
     r2_list.append(r2)
@@ -50,7 +58,7 @@ def pca_function(city_data):
 
     print(f'{city_data} test')
     print('R2', r2)
-    print('MSE', mse)
+    print('MSE', mse, '\n')
 
     r2 = regressor.score(X_validation, Y_validation)
     mse = mean_squared_error(Y_validation, val_prediction)
@@ -73,6 +81,19 @@ def pca_function(city_data):
 #    plt.savefig(f"PCA + Linear Regression ({city_data}).jpg")
 #    plt.close() 
 
+    # Perform 2-means clustering
+    clusters = KMeans(n_clusters=2).fit(X_train)
+
+    # Visualise the first 2 PCs
+    sns.scatterplot(x=X_train[:,0], 
+                    y=X_train[:,1],
+                    hue=clusters.labels_)
+    plt.title("PCA with 2 components")
+    plt.xlabel('1st Principal Component')
+    plt.ylabel('2nd Principal Component')
+
+    plt.savefig(f"pca{city_data}.jpg")
+    plt.close()
     
     return
 

@@ -1,3 +1,4 @@
+from operator import length_hint
 import random
 import csv
 import seaborn as sns
@@ -50,7 +51,30 @@ def training_validation(city_data):
     print('r2 = ', r2)
     print('mse = ', mse)
 
+
     print("\n\n================================================\n\n")
+
+    plt.scatter(y_validation, y_pred, alpha=0.8)
+    plt.grid()
+    plt.title(f'Linear Regression Plot: {city_data}')
+    plt.xlabel('Actual Energy Demand')
+    plt.ylabel('Predicted Energy Demand')
+    plt.savefig(f"Linear_Regression_Plot_{city_data}.png")
+    plt.close() 
+
+    # plot residuals
+    residuals = y_validation - y_pred
+    plt.scatter(y_pred, residuals, alpha=0.8)
+
+    # plot the 0 line (we want our residuals close to 0)
+    plt.plot([min(y_pred), max(y_pred)], [0,0], color='red')
+    plt.grid()
+    plt.title(f'Linear Regression Residual Plot: {city_data}')
+    plt.xlabel('Fitted')
+    plt.ylabel('Residual')
+
+    plt.savefig(f"Residual_Plot_{city_data}.png")
+    plt.close()
     
     return
 
